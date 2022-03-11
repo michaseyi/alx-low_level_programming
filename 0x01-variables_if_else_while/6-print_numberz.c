@@ -1,20 +1,19 @@
+
 #include <stdio.h>
-
+#include <unistd.h>
 /**
- * main -Entry point
- * Description: prints allsingle digit numbers of
- * base 10 from 0
- * Return: 0
+ * main - Entry point
+ * Description: prints char below 10
+ * Return: Always 0 (success)
  */
-
 int main(void)
-{	
-	int i;
+{
+	int a;
 
-	for (i = '0'; i <= '9'; i++)
+	for (a = 0; a < 10; a++)
 	{
-		putchar(i);
+		putchar(a + '0');
 	}
-	putchar(10);
+	putchar('\n');
 	return (0);
 }
