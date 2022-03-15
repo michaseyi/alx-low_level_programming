@@ -38,7 +38,7 @@ void jack_bauer(void)
 				}
 			} else 
 			{
-				c++
+				c++;
 			}
 		} else 
 		{
