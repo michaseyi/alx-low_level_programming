@@ -13,7 +13,7 @@ void puts2(char *str)
 	while (str[i])
 	{
 		if (str[i] % 2 == 0)
-			_puthcar(str[i]);
+			_putchar(str[i]);
 		i++;
 	}
 	_putchar(10);
