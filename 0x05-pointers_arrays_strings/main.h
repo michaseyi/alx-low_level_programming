@@ -8,4 +8,4 @@ void rev_string(char *);
 void puts2(char *);
 void puts_half(char *str);
 void print_array(int *, int);
-
+char *_strcpy(char *, char *);
