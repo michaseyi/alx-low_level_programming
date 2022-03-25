@@ -2,37 +2,36 @@
 #include <stdio.h>
 
 /**
- * print_buffer - Prints a buffer 10 bytes at a time, starting with
- *                the byte position, then showing the hex content,
- *                then displaying printable charcaters.
- * @b: The buffer to be printed.
- * @size: The number of bytes to be printed from the buffer.
+ * print_buffer - Prints out buffer 10 bytes on a line
+ * @b: buffer to be printed
+ * @size: size of the buffer
+ * Return: void
  */
 
 void print_buffer(char *b, int size)
 {
-	int byte, index;
+	int address = 0, i = 0, j;
 
-	for (byte = 0; byte < size; byte += 10)
+	for (; i < size; i += 10)
 	{
-		printf("%08x: ", byte);
+		printf("%08x: ", address + i);
 
-		for (index = 0; index < 10; index++)
+		for (j = 0; j < 10; j++)
 		{
-			if ((index + byte) >= size)
-				printf("  ");
+			if ((i + j) < size)
+				printf("%02x", *(b + i + j));
 			else
-				printf("%02x", *(b + index + byte));
-			if ((index % 2) != 0 && index != 0)
+				printf("  ");
+
+			if ((j + 1) % 2 == 0)
 				printf(" ");
 		}
-		for (index = 0; index < 10; index++)
+		for (j = 0; j < 10; j++)
 		{
-			if ((index + byte) >= size)
+			if ((i + j) >= size)
 				break;
-			else if (*(b + index + byte) >= 31 &&
-				 *(b + index + byte) <= 126)
-				printf("%c", *(b + index + byte));
+			if ((*(b + i + j) >= '!' && *(b + i + j) <= '~') || *(b + i + j) == ' ')
+				printf("%c", *(b + i + j));
 			else
 				printf(".");
 		}
