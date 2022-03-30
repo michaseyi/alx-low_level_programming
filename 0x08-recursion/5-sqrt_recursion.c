@@ -11,10 +11,10 @@ int sq(int n, int i)
 {
 	if (n < 1)
 		return (-1);
-	if (i == n)
-		return (-1);
 	if ((i * i) == n)
 		return (i);
+	if (i == n)
+		return (-1);
 	return (sq(n, i + 1));
 }
 
