@@ -15,7 +15,7 @@ int sq(int n, int i)
 		return (-1);
 	if ((i * i) == n)
 		return (i);
-	sq(n, i + 1);
+	return (sq(n, i + 1));
 }
 
 /**
