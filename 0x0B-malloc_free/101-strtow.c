@@ -115,6 +115,8 @@ char **strtow(char *str)
 	if (str == NULL || !strcmp(str, ""))
 		return (NULL);
 	lenWords = numberOfWords(str);
+	if (lenWords == 0)
+		return (NULL);
 	words = (char **)malloc(sizeof(char *) * (lenWords + 1));
 	if (words == NULL)
 		return (NULL);
