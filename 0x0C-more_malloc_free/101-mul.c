@@ -1,6 +1,26 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "main.h"
+
+void _printf(char *str);
+
+/**
+ * _printf - prints out a string
+ * @str: input string
+ * Return: void
+ */
+
+void _printf(char *str)
+{
+	int i = 0;
+
+	while (i < (int)strlen(str))
+	{
+		_putchar(str[i]);
+		i++;
+	}
+}
 
 char *mul(char *num, char digit, int numZero);
 
@@ -126,7 +146,8 @@ void is_number(char *str)
 	{
 		if (str[i] < '0' || str[i] > '9')
 		{
-			printf("Error\n");
+			_printf("Error");
+			_putchar(10);
 			exit(98);
 		}
 	}
@@ -150,6 +171,7 @@ char *iterateZero(char *str)
 	return (str + i);
 }
 
+
 /**
  * main - Entry point
  * @argc: number of command line argument
@@ -164,7 +186,8 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		printf("Error\n");
+		_printf("Error");
+		_putchar(10);
 		exit(98);
 	}
 	num1 = argv[1];
@@ -180,20 +203,23 @@ int main(int argc, char *argv[])
 		{
 			if (strlen(result))
 				free(result);
-			printf("Error\n");
+			_printf("Error");
+			_putchar(10);
 			exit(98);
 		}
 		result = add(result, multResult);
 		if (result == NULL)
 		{
 			free(multResult);
-			printf("Error\n");
+			_printf("Error");
+			_putchar(10);
 			exit(98);
 		}
 		free(multResult);
 	}
 
-	printf("%s\n", iterateZero(result));
+	_printf(iterateZero(result));
+	_putchar(10);
 	free(result);
 	return (0);
 }
