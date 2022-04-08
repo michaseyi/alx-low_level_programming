@@ -1,21 +1,57 @@
-#include <string.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include "main.h"
 
-void _printf(char *str);
+int _strlen(char *s);
 
 /**
- * _printf - prints out a string
+ * _strlen - returns length of a string
+ * @s: Pointer to the string
+ *
+ * Return: length of string
+ */
+
+int _strlen(char *s)
+{
+	int length = 0;
+
+	while (s[length])
+		length++;
+	return (length);
+}
+
+void _strcpy(char *dest, char *src);
+
+/**
+ * _strcpy - copy source to dest
+ * @dest: destination string
+ * @src: source string
+ * Return: void
+ */
+
+void _strcpy(char *dest, char *src)
+{
+	int i, j = _strlen(src);
+
+	for (i = 0; i < j; i++)
+	{
+		dest[i] = src[i];
+	}
+	dest[i] = '\0';
+}
+
+void _print(char *str);
+
+/**
+ * _print - prints out a string
  * @str: input string
  * Return: void
  */
 
-void _printf(char *str)
+void _print(char *str)
 {
 	int i = 0;
 
-	while (i < (int)strlen(str))
+	while (i < (int)_strlen(str))
 	{
 		_putchar(str[i]);
 		i++;
@@ -34,7 +70,7 @@ char *mul(char *num, char digit, int numZero);
 
 char *mul(char *num, char digit, int numZero)
 {
-	int size = strlen(num) + 1 + numZero, i = strlen(num), j = size, carry = 0;
+	int size = _strlen(num) + 1 + numZero, i = _strlen(num), j = size, carry = 0;
 	int sum;
 	char *res2, *res;
 
@@ -64,7 +100,7 @@ char *mul(char *num, char digit, int numZero)
 		free(res);
 		return (NULL);
 	}
-	strcpy(res2, res + 1);
+	_strcpy(res2, res + 1);
 	free(res);
 	return (res2);
 }
@@ -80,7 +116,7 @@ char *add(char *n1, char *n2);
 
 char *add(char *n1, char *n2)
 {
-	int temp = 0, sum, l1 = strlen(n1) - 1, l2 = strlen(n2) - 1, s, s2;
+	int temp = 0, sum, l1 = _strlen(n1) - 1, l2 = _strlen(n2) - 1, s, s2;
 	char *r, *r2;
 
 	s = l1 > l2 ? l1 + 2 : l2 + 2;
@@ -88,7 +124,7 @@ char *add(char *n1, char *n2)
 	r = malloc(sizeof(char) * (s + 1));
 	if (r == NULL)
 	{
-		if (strlen(n1))
+		if (_strlen(n1))
 			free(n1);
 		return (NULL);
 	}
@@ -112,7 +148,7 @@ char *add(char *n1, char *n2)
 			r[s--] = (sum % 10) + '0';
 		}
 	}
-	if (strlen(n1))
+	if (_strlen(n1))
 		free(n1);
 	if (temp)
 	{
@@ -125,7 +161,7 @@ char *add(char *n1, char *n2)
 		free(r);
 		return (NULL);
 	}
-	strcpy(r2, r + 1);
+	_strcpy(r2, r + 1);
 	free(r);
 	return (r2);
 }
@@ -142,11 +178,11 @@ void is_number(char *str)
 {
 	int i;
 
-	for (i = 0; i < (int)strlen(str); i++)
+	for (i = 0; i < (int)_strlen(str); i++)
 	{
 		if (str[i] < '0' || str[i] > '9')
 		{
-			_printf("Error");
+			_print("Error");
 			_putchar(10);
 			exit(98);
 		}
@@ -186,7 +222,7 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		_printf("Error");
+		_print("Error");
 		_putchar(10);
 		exit(98);
 	}
@@ -195,30 +231,26 @@ int main(int argc, char *argv[])
 
 	is_number(num1);
 	is_number(num2);
-	len1 = strlen(num1);
+	len1 = _strlen(num1);
 	while (--len1 >= 0)
 	{
 		multResult = mul(num2, num1[len1], i++);
 		if (multResult == NULL)
 		{
-			if (strlen(result))
+			if (_strlen(result))
 				free(result);
-			_printf("Error");
-			_putchar(10);
 			exit(98);
 		}
 		result = add(result, multResult);
 		if (result == NULL)
 		{
 			free(multResult);
-			_printf("Error");
-			_putchar(10);
 			exit(98);
 		}
 		free(multResult);
 	}
 
-	_printf(iterateZero(result));
+	_print(iterateZero(result));
 	_putchar(10);
 	free(result);
 	return (0);
