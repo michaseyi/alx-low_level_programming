@@ -212,7 +212,14 @@ int main(int argc, char *argv[])
 	len2 = _strlen(num2);
 	size = len1 + len2 + 1;
 	result = malloc(sizeof(char) * size);
-	multResult = malloc(sizeof(char) * size);
+	if (result == NULL)
+		exit(98);
+	multResult = malloc(sizeof(char) * size)
+	if (multResult == NULL)
+	{
+		free(result);
+		exit(98);
+	}
 	result[size - 1] = '\0';
 	multResult[size - 1] = '\0';
 
