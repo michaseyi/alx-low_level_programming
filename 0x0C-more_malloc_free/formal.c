@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include "main.h"
 #include <stdio.h>
 
 int _strlen(char *s);
@@ -58,73 +59,112 @@ void _print(char *str)
 	}
 }
 
-void mul(char *res, char *num, char digit, int numZero);
+char *mul(char *num, char digit, int numZero);
 
 /**
  * mul - multiplies a number by a single digit and appends zeros to it
- * @res: where to store the result
  * @num: number
  * @digit: digit
  * @numZero: number of zeroes to add
- * Return: void
+ * Return: pointer to the result or NULL if memory allocatin fails
  */
 
-void mul(char *res, char *num, char digit, int numZero)
+char *mul(char *num, char digit, int numZero)
 {
-	int i = _strlen(num), carry = 0, size = _strlen(res) - 1;
+	int size = _strlen(num) + 1 + numZero, i = _strlen(num), j = size, carry = 0;
 	int sum;
+	char *res2, *res;
 
+	res = malloc(sizeof(char) * (size + 1));
+	if (res == NULL)
+		return (NULL);
+	res[size] = '\0';
 	while (numZero > 0)
 	{
-		size--;
+		res[--size] = '0';
 		numZero--;
 	}
-	while (i > 0)
+	while (--size >= 1)
 	{
 		sum = (digit - '0') * (num[--i] - '0') + carry;
-		res[size--] = (sum % 10) + '0';
+		res[size] = (sum % 10) + '0';
 		carry = sum / 10;
 	}
 	if (carry)
+	{
 		res[size] = carry + '0';
+		return (res);
+	}
+	res2 = malloc(sizeof(char) * j);
+	if (res2 == NULL)
+	{
+		free(res);
+		return (NULL);
+	}
+	_strcpy(res2, res + 1);
+	free(res);
+	return (res2);
 }
 
-void add(char *n1, char *n2);
+char *add(char *n1, char *n2);
 
 /**
  * add - Adds two number together
  * @n1: first number
  * @n2: second number
- * Return: void
+ * Return: Pointer to sum or NULL if memory allocation fails
  */
 
-void add(char *n1, char *n2)
+char *add(char *n1, char *n2)
 {
-	int temp = 0, sum, l1 = _strlen(n1) - 1, l2 = _strlen(n2) - 1, s = l1;
+	int temp = 0, sum, l1 = _strlen(n1) - 1, l2 = _strlen(n2) - 1, s, s2;
+	char *r, *r2;
 
+	s = l1 > l2 ? l1 + 2 : l2 + 2;
+	s2 = s;
+	r = malloc(sizeof(char) * (s + 1));
+	if (r == NULL)
+	{
+		if (_strlen(n1))
+			free(n1);
+		return (NULL);
+	}
+	r[s--] = '\0';
 	while (l2 >= 0 || l1 >= 0)
 	{
 		if (l1 >= 0 || l1 >= 0)
 		{
 			sum = (n1[l1--] - '0') + (n2[l2--] - '0') + temp;
 			temp = sum / 10;
-			n1[s--] = (sum % 10) + '0';
+			r[s--] = (sum % 10) + '0';
 		} else if (l1 >= 0 && l2 < 0)
 		{
 			sum = (n1[l1--] - '0') + temp;
 			temp = sum / 10;
-			n1[s--] = (sum % 10) + '0';
+			r[s--] = (sum % 10) + '0';
 		} else if (l2 >= 0 && l1 < 0)
 		{
 			sum = (n2[l2--] - '0') + temp;
 			temp = sum / 10;
-			n1[s--] = (sum % 10) + '0';
+			r[s--] = (sum % 10) + '0';
 		}
 	}
+	if (_strlen(n1))
+		free(n1);
 	if (temp)
 	{
-		n1[s] = temp + '0';
+		r[s] = temp + '0';
+		return (r);
 	}
+	r2 = malloc(sizeof(char) * s2);
+	if (r2 == NULL)
+	{
+		free(r);
+		return (NULL);
+	}
+	_strcpy(r2, r + 1);
+	free(r);
+	return (r2);
 }
 
 void is_number(char *str);
@@ -167,22 +207,7 @@ char *iterateZero(char *str)
 
 	return (str + i);
 }
-void init(char *str, int size);
 
-/**
- * init - sets each charater in str to '0'
- * @str: input string
- * @size: size
- * Return: void
- */
-
-void init(char *str, int size)
-{
-	int i = 0;
-
-	for (; i < size - 1; i++)
-		str[i] = '0';
-}
 
 /**
  * main - Entry point
@@ -191,11 +216,10 @@ void init(char *str, int size)
  * Return: 0
  */
 
-
 int main(int argc, char *argv[])
 {
-	char *num1, *num2, *multResult, *result;
-	int len1, len2, i = 0, size;
+	char *num1, *num2, *multResult, *result = "\0";
+	int len1, i = 0;
 
 	if (argc != 3)
 	{
@@ -209,25 +233,26 @@ int main(int argc, char *argv[])
 	is_number(num1);
 	is_number(num2);
 	len1 = _strlen(num1);
-	len2 = _strlen(num2);
-	size = len1 + len2 + 1;
-	result = malloc(sizeof(char) * size);
-	multResult = malloc(sizeof(char) * size);
-	result[size - 1] = '\0';
-	multResult[size - 1] = '\0';
-
-	init(result, size);
-	init(multResult, size);
 	while (--len1 >= 0)
 	{
-		init(multResult, size);
-		mul(multResult, num2, num1[len1], i++);
-		add(result, multResult);
+		multResult = mul(num2, num1[len1], i++);
+		if (multResult == NULL)
+		{
+			if (_strlen(result))
+				free(result);
+			exit(98);
+		}
+		result = add(result, multResult);
+		if (result == NULL)
+		{
+			free(multResult);
+			exit(98);
+		}
+		free(multResult);
 	}
 
 	_print(iterateZero(result));
 	putchar(10);
-	free(multResult);
 	free(result);
 	return (0);
 }
