@@ -19,26 +19,6 @@ int _strlen(char *s)
 	return (length);
 }
 
-void _strcpy(char *dest, char *src);
-
-/**
- * _strcpy - copy source to dest
- * @dest: destination string
- * @src: source string
- * Return: void
- */
-
-void _strcpy(char *dest, char *src)
-{
-	int i, j = _strlen(src);
-
-	for (i = 0; i < j; i++)
-	{
-		dest[i] = src[i];
-	}
-	dest[i] = '\0';
-}
-
 void _print(char *str);
 
 /**
