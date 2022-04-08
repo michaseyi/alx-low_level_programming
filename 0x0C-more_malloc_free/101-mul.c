@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "main.h"
+#include <stdio.h>
 
 int _strlen(char *s);
 
@@ -53,7 +54,7 @@ void _print(char *str)
 
 	while (i < (int)_strlen(str))
 	{
-		_putchar(str[i]);
+		putchar(str[i]);
 		i++;
 	}
 }
@@ -183,7 +184,7 @@ void is_number(char *str)
 		if (str[i] < '0' || str[i] > '9')
 		{
 			_print("Error");
-			_putchar(10);
+			putchar(10);
 			exit(98);
 		}
 	}
@@ -223,7 +224,7 @@ int main(int argc, char *argv[])
 	if (argc != 3)
 	{
 		_print("Error");
-		_putchar(10);
+		putchar(10);
 		exit(98);
 	}
 	num1 = argv[1];
@@ -251,7 +252,7 @@ int main(int argc, char *argv[])
 	}
 
 	_print(iterateZero(result));
-	_putchar(10);
+	putchar(10);
 	free(result);
 	return (0);
 }
