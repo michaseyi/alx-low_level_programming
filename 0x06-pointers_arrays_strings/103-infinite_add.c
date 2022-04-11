@@ -49,5 +49,5 @@ char *infinite_add(char *n1, char *n2, char *r, int s)
 		r[s] = temp + '0';
 		return (r + s);
 	}
-	return (r + s + 1);
+	return (r + s + 3);
 }
