@@ -3,9 +3,9 @@
 /**
  * init_dog - initializes a dog struct
  * @d: dog struct
- * @name: name
- * @age: age
- * @owner: owner
+ * @name: name of dog
+ * @age: age of dog
+ * @owner: owner of dog
  * Return: void
  */
 
