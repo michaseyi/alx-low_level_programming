@@ -20,7 +20,7 @@ fptr get_op_func(char *s)
 	};
 	while (ops[i].op)
 	{
-		if (s[0] == ops[i].op[0])
+		if (!strcmp(s, ops[i].op))
 			return (ops[i].f);
 		i++;
 	}
