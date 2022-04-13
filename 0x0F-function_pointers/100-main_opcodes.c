@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef unsigned char *byte;
 
 /**
  * main - Prints out the first argv[1] bytes of instructions
@@ -14,7 +13,7 @@ typedef unsigned char *byte;
 int main(int argc, char *argv[])
 {
 	int n, i;
-	byte ptr = (void *)main;
+	unsigned char *ptr = (void *)main;
 
 	if (argc != 2)
 	{
@@ -33,6 +32,7 @@ int main(int argc, char *argv[])
 		if (i != n - 1)
 			printf(" ");
 	}
-	printf("\n");
+	if (n != 0)
+		printf("\n");
 	return (0);
 }
