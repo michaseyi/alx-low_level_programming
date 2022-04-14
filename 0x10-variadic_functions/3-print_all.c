@@ -14,7 +14,7 @@ void print_all(const char * const format, ...)
 	va_list list;
 
 	va_start(list, format);
-	while (format[i] != 0)
+	while (format && format[i] != 0)
 	{
 		j = 0;
 		while (j < 4 && ops[j].name != format[i])
