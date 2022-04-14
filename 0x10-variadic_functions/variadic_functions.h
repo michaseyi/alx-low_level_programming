@@ -25,6 +25,16 @@ void print_i(va_list, int *);
 void print_f(va_list, int *);
 void print_s(va_list, int *);
 void print_n(va_list, int *);
+
+/**
+ * print_n - prints nothing
+ * @l: valist
+ * @n: pointer to number of printed arguments
+ */
+
+void print_n(va_list l __attribute__((unused)), int *n __attribute__((unused)))
+{
+}
 int sum_them_all(const unsigned int n, ...);
 void print_numbers(const char *, const unsigned int, ...);
 void print_strings(const char *, const unsigned int, ...);

@@ -40,15 +40,7 @@ void print_i(va_list list, int *n)
 	printf("%d", va_arg(list, int));
 }
 
-/**
- * print_n - prints nothing
- * @l: valist
- * @n: pointer to number of printed arguments
- */
 
-void print_n(va_list l __attribute__((unused)), int *n __attribute__((unused)))
-{
-}
 /**
  * print_s - prints a string
  * @list: va_list
