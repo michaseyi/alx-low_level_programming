@@ -4,7 +4,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-typedef void (*fptr)(va_list, int *);
+typedef void (*fptr)(va_list);
 
 /**
  * struct operation - Struct operation
@@ -20,11 +20,10 @@ typedef struct operation
 } operation;
 
 void print_all(const char * const format, ...);
-void print_c(va_list, int *);
-void print_i(va_list, int *);
-void print_f(va_list, int *);
-void print_s(va_list, int *);
-void print_n(va_list, int *);
+void print_c(va_list);
+void print_i(va_list);
+void print_f(va_list);
+void print_s(va_list);
 
 
 int sum_them_all(const unsigned int n, ...);

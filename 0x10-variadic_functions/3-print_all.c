@@ -10,8 +10,9 @@ void print_all(const char * const format, ...)
 {
 	int i = 0, j, n = 0;
 	operation ops[] = {{'c', print_c}, {'i', print_i}, {'f', print_f},
-		{'s', print_s}, {'\0', print_n}};
+		{'s', print_s}};
 	va_list list;
+	char *space = "";
 
 	va_start(list, format);
 	while (format && format[i] != 0)
@@ -19,9 +20,12 @@ void print_all(const char * const format, ...)
 		j = 0;
 		while (j < 4 && ops[j].name != format[i])
 			j++;
-		if (n != 0 && ops[j].name)
-			printf(", ");
-		ops[j].f(list, &n);
+		if (j < 4)
+		{
+			printf("%s", space);
+			ops[j].f(list);
+			space = ", ";
+		}
 		i++;
 	}
 	printf("\n");
@@ -31,35 +35,22 @@ void print_all(const char * const format, ...)
 /**
  * print_i - prints an integer
  * @list: valist
- * @n: pointer to number of printed arguments
  */
 
-void print_i(va_list list, int *n)
+void print_i(va_list list)
 {
-	(*n)++;
 	printf("%d", va_arg(list, int));
 }
 
 /**
- * print_n - prints nothing
- * @l: valist
- * @n: pointer to number of printed arguments
- */
-
-void print_n(va_list l __attribute__((unused)), int *n __attribute__((unused)))
-{
-}
-/**
  * print_s - prints a string
  * @list: va_list
- * @n: pointer to number of printed argumets
  */
 
-void print_s(va_list list, int *n)
+void print_s(va_list list)
 {
 	char *str;
 
-	(*n)++;
 	str = va_arg(list, char *);
 	if (str == NULL)
 	{
@@ -72,24 +63,20 @@ void print_s(va_list list, int *n)
 /**
  * print_f - prints a float
  * @list: va_list
- * @n: pointer to number of printed arguments
  */
 
-void print_f(va_list list, int *n)
+void print_f(va_list list)
 {
-	(*n)++;
 	printf("%f", (float)va_arg(list, double));
 }
 
 /**
  * print_c - prints a character
  * @list: va_list
- * @n: pointer to number of printed arguments
  */
 
-void print_c(va_list list, int *n)
+void print_c(va_list list)
 {
-	(*n)++;
 	printf("%c", va_arg(list, int));
 }
 
