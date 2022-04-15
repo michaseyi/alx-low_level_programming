@@ -8,7 +8,7 @@
 
 void print_all(const char * const format, ...)
 {
-	int i = 0, j, n = 0;
+	int i = 0, j;
 	operation ops[] = {{'c', print_c}, {'i', print_i}, {'f', print_f},
 		{'s', print_s}};
 	va_list list;
