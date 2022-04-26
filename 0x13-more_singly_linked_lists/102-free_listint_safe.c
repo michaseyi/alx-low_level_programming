@@ -9,7 +9,7 @@
 size_t free_listint_safe(listint_t **h)
 {
 	listint_t *next, *current;
-	const listint_t *loop = NULL;
+	const listint_t *loop = NULL, *loop_addr = get_loop(*h);
 	size_t ret_val = 0;
 
 	if (h == NULL)
@@ -17,9 +17,8 @@ size_t free_listint_safe(listint_t **h)
 	current = *h;
 	while (current != loop)
 	{
-		printf("I freed %d\n", current->n);
-		if (current == get_loop(current))
-			loop = get_loop(current);
+		if (current == loop_addr)
+			loop = loop_addr;
 		next = current->next;
 		free(current);
 		current = next;
