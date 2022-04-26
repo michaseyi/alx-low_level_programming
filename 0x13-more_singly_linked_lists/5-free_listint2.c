@@ -8,22 +8,13 @@
 
 void free_listint2(listint_t **head)
 {
-	free_list(*head);
-	*head = NULL;
-}
+	listint_t *next, *current = *head;
 
-/**
- * free_list - Frees a listint_t list
- * @head: Head node of listint_t list
- * Return: Void
- */
-
-void free_list(listint_t *head)
-{
-	if (head && head->next != NULL)
-		free_list(head->next);
-	if (head != NULL)
+	while (current)
 	{
-		free(head);
+		next = current->next;
+		free(current);
+		current = next;
 	}
+	*head = NULL;
 }
