@@ -8,7 +8,7 @@
 
 const listint_t *get_loop(const listint_t *head)
 {
-	const listint_t *fast, *slow, *ret_val = NULL;
+	const listint_t *fast, *slow;
 
 	fast = head;
 	slow = head;
@@ -25,11 +25,10 @@ const listint_t *get_loop(const listint_t *head)
 				slow = slow->next;
 				fast = fast->next;
 			}
-			ret_val = slow;
-			break;
+			return (slow);
 		}
 	}
-	return (ret_val);
+	return (NULL);
 }
 
 /**
