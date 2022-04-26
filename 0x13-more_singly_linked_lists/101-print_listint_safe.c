@@ -12,7 +12,7 @@ const listint_t *get_loop(const listint_t *head)
 
 	fast = head;
 	slow = head;
-	
+
 	while (slow && fast && fast->next)
 	{
 		fast = fast->next->next;

@@ -11,13 +11,15 @@ size_t free_listint_safe(listint_t **h)
 	listint_t *next, *current;
 	const listint_t *loop = NULL;
 	size_t ret_val = 0;
+
 	if (h == NULL)
 		return (ret_val);
 	current = *h;
 	while (current != loop)
 	{
-		if (current == get_loop(*h))
-			loop = get_loop(*h);
+		printf("I freed %d\n", current->n);
+		if (current == get_loop(current))
+			loop = get_loop(current);
 		next = current->next;
 		free(current);
 		current = next;
