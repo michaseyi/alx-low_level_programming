@@ -12,7 +12,7 @@ main:
     call printf
 
     pop rbp
-    
+
     mov rax, 0
     ret
 
