@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "../main.h"
+#include <limits.h>
 
 /**
  * main - check the code
@@ -10,8 +11,9 @@ int main(void)
 {
     unsigned int n;
 
-    n = binary_to_uint("1");
+    n = binary_to_uint("1111111111111111111111111111111");
     printf("%u\n", n);
+    printf("%u\n", UINT_MAX);
     n = binary_to_uint("101");
     printf("%u\n", n);
     n = binary_to_uint("1e01");
