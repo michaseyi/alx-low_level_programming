@@ -11,7 +11,7 @@ int main(void)
 {
     unsigned int n;
 
-    n = binary_to_uint("1111111111111111111111111111111");
+    n = binary_to_uint("");
     printf("%u\n", n);
     printf("%u\n", UINT_MAX);
     n = binary_to_uint("101");
