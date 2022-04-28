@@ -12,13 +12,16 @@ unsigned int raise_pow(int base, unsigned int power);
 
 unsigned int binary_to_uint(const char *b)
 {
-	unsigned int i, len = strlen(b), ret_val = 0;
+	unsigned int i, len, ret_val = 0;
 
-	if (!b)
+	if (b == NULL)
 		return (ret_val);
 	for (i = 0; b[i]; i++)
+	{
 		if (b[i] != '0' && b[i] != '1')
 			return (ret_val);
+	}
+	len = strlen(b);
 	i = 0;
 	len--;
 	while (1)
