@@ -54,14 +54,14 @@ int main(int argc, char *argv[])
 	if (argc != 3)
 		create_error(97, EMPTY, NULL, NULL);
 
-	buffer = malloc(sizeof(char) * 1024);
+	buffer = malloc(sizeof(char) * BUFFER);
 	if (buffer == NULL)
 		create_error(99, EMPTY, argv[2], NULL);
 
 	source = open(argv[1], O_RDONLY);
 	if (source == -1)
 		create_error(98, EMPTY, argv[1], buffer);
-	dest = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0600);
+	dest = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (dest == -1)
 		create_error(99, EMPTY, argv[2], buffer);
 
