@@ -41,7 +41,7 @@ void create_error(int type, char *filename, int fd)
  * Return: 1 if it is an ELF file else 0
  */
 
-int elf_valid(char *header)
+int elf_valid(unsigned char *header)
 {
 	int ret_val;
 
@@ -278,7 +278,7 @@ void close_file(int fd)
 int main(int argc, char *argv[])
 {
 	Elf64_Ehdr header;
-	int fd, read_ret, close_ret;
+	int fd, read_ret;
 
 	if (argc != 2)
 		create_error(97, NULL, -1);
