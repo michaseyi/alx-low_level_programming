@@ -19,19 +19,19 @@ void create_error(int type, char *filename, int fd)
 	{
 	case 97:
 		dprintf(STDERR_FILENO, "Usage: elf_header elf_file\n");
-		exit(type);
+		exit(98);
 	case 98:
 		dprintf(STDERR_FILENO, "Error: Can't open %s\n", filename);
-		exit(type);
+		exit(98);
 	case 99:
 		dprintf(STDERR_FILENO, "Error: %s is not a vaild elf file\n", filename);
-		exit(type);
+		exit(98);
 	case 100:
 		dprintf(STDERR_FILENO, "Error: Can't read from %s\n", filename);
-		exit(type);
+		exit(98);
 	case 101:
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
-		exit(type);
+		exit(98);
 	}
 }
 
