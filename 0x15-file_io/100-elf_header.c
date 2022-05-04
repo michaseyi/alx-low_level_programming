@@ -4,6 +4,17 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+void create_error(int, char *, int);
+int elf_valid(unsigned char *);
+void print_magic(unsigned char *);
+void print_class(unsigned char *);
+void print_data(unsigned char *);
+void print_version(unsigned char *);
+void print_abi(unsigned char *);
+void print_osabi(unsigned char *);
+void print_type(unsigned int, unsigned char *);
+void print_entry(unsigned long int, unsigned char *);
+void close_file(int);
 
 /**
  * create_error - Prints out an error message to the standard error
@@ -45,8 +56,8 @@ int elf_valid(unsigned char *header)
 {
 	int ret_val;
 
-	ret_val = (header[0] == 0x7f) && (header[1] == 'E') && 
-				(header[2] == 'L') && (header[3] == 'F');
+	ret_val = (header[0] == 0x7f) && (header[1] == 'E') &&
+				 (header[2] == 'L') && (header[3] == 'F');
 	return (ret_val);
 }
 
@@ -196,7 +207,6 @@ void print_abi(unsigned char *e_ident)
 	printf("  ABI Version:                       %d\n",
 			 e_ident[EI_ABIVERSION]);
 }
-
 
 /**
  * print_type - Prints the type of an ELF header file
