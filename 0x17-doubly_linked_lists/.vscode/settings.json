@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"*.ejs": "html",
+		"*.js": "javascript",
+		"new": "cpp",
+		"lists.h": "c"
+	}
+}
