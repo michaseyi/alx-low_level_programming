@@ -6,11 +6,18 @@ def island_perimeter(grid):
     """
     island_perimeter returns the perimeter of the island discribed in the grid
 
-    :param grid(list[list[int]]): is a 2D array repesenting the land zone and 
+    :param grid(list[list[int]]): is a 2D array repesenting the land zone and
     zone
     :return int: the perimeter of the island in the grid if present
     """
     def get_value(y, x):
+        """
+        get_vale checks whether a position in the grid is land or water
+
+        :param y(int): is the y coordinate
+        :param x(int): is the x coordinate
+        :return int: 1 if water zone else 0
+        """
         try:
             if y < 0 or x < 0:
                 raise
