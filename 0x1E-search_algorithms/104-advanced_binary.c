@@ -37,8 +37,8 @@ int _advanced_binary(int *array, int start, int end, int value)
 	print(array, start, end);
 	if (array[mid] == value)
 	{
-		if (mid && array[mid - 1] == array[mid])
-			return (_advanced_binary(array, start, mid - 1, value));
+		if (mid > 0 && array[mid - 1] == value)
+			return (_advanced_binary(array, start, mid, value));
 		return (mid);
 	}
 	else if (array[mid] > value)
