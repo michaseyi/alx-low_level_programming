@@ -30,10 +30,11 @@ int advanced_binary(int *array, size_t size, int value)
  */
 int _advanced_binary(int *array, int start, int end, int value)
 {
-	int mid = ((end - start) / 2) + start;
+	int mid;
 
 	if (start > end)
 		return (-1);
+	mid = ((end - start) / 2) + start;
 	print(array, start, end);
 	if (array[mid] == value)
 	{
