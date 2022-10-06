@@ -1,6 +1,7 @@
 #include "search_algos.h"
 #include <math.h>
 #include <stdio.h>
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 /**
  * advance - advances a pointer forward
@@ -13,8 +14,11 @@ listint_t *advance(listint_t *current, size_t count)
 {
 	while (count)
 	{
-		if (!current)
+		if (!current->next)
+		{
+			current->index++;
 			break;
+		}
 		current = current->next;
 		count--;
 	}
@@ -38,11 +42,17 @@ listint_t *jump_list(listint_t *list, size_t size, int value)
 		return (NULL);
 	while (start->index < size)
 	{
-		printf("Value checked at index [%lu] = [%d]\n", start->index, start->n);
-		if (!end || end->n >= value)
+		printf("Value checked at index [%lu] = [%d]\n",
+			   MIN(size - 1, end->index), end->n);
+		if (end->index >= size || end->n >= value)
 		{
 			printf("Value found between indexes [%lu] and [%lu]\n",
-				   start->index, end ? end->index : size - 1);
+				   start->index, MIN(end->index, size - 1));
+			if (end->index > size - 1)
+			{
+				end->index = size - 1;
+				end = NULL;
+			}
 			while (1)
 			{
 				if (!start)
